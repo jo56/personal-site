@@ -228,13 +228,4 @@ p {
     .content {
         padding: 1rem;
     }
-
-    #home .social-links {
-        left: 0;
-    }
-
-    #about .social-links,
-    #projects .social-links {
-        left: 0;
-    }
 }
