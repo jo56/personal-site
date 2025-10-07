@@ -234,4 +234,10 @@ p {
     .content {
         padding: 1rem;
     }
+
+    #home .social-links,
+    #about .social-links,
+    #projects .social-links {
+        left: 0;
+    }
 }
