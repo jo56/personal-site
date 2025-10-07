@@ -52,6 +52,10 @@ body {
     margin-top: 1rem;
 }
 
+#about {
+    margin-top: -.3rem;
+}
+
 .section.active {
     display: block;
 }
@@ -62,6 +66,7 @@ h1 {
     letter-spacing: -0.05em;
     margin: -2rem 0 -1rem 0;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 h2 {
@@ -86,6 +91,12 @@ p {
 }
 
 #home .social-links {
+    left: -.8rem;
+    pointer-events: auto;
+}
+
+#about .social-links,
+#projects .social-links {
     left: -.8rem;
 }
 
