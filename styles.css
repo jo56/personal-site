@@ -60,7 +60,7 @@ h1 {
     font-size: 4rem;
     font-weight: 300;
     letter-spacing: -0.05em;
-    margin: 0;
+    margin: 0 0 -0.5rem 0;
     white-space: nowrap;
 }
 
@@ -81,7 +81,12 @@ p {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
-    margin-top: 1.5rem;
+    margin-top: 0.3rem;
+    position: relative;
+}
+
+#home .social-links {
+    left: 0.5rem;
 }
 
 .social-links a {
@@ -94,6 +99,62 @@ p {
 
 .social-links a:hover {
     opacity: 1;
+}
+
+.email-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.email-icon:hover {
+    opacity: 1;
+}
+
+.email-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fafafa;
+    border: 1px solid #1a1a1a;
+    padding: 2rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.email-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.email-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.email-popup-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .project-list {
