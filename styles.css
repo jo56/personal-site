@@ -240,4 +240,8 @@ p {
     #projects .social-links {
         left: 0;
     }
+
+    .project-list {
+        left: 0;
+    }
 }
