@@ -56,6 +56,10 @@ body {
     margin-top: -.3rem;
 }
 
+#projects {
+    margin-top: -1rem;
+}
+
 .section.active {
     display: block;
 }
