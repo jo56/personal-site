@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" fill="#fafafa"/>
+  <text
+    x="32"
+    y="52"
+    font-family="'Courier New', monospace"
+    font-size="64"
+    font-weight="300"
+    text-anchor="middle"
+    fill="#1a1a1a"
+    letter-spacing="-0.05em">J</text>
+</svg>
