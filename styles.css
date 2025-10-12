@@ -377,4 +377,26 @@ p {
     .project-list {
         left: 0;
     }
+
+    .readme-popup {
+        max-width: 90%;
+        max-height: 70vh;
+        padding: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .readme-popup h1 {
+        font-size: 1.2rem;
+        margin: 0 0 0.75rem 0;
+    }
+
+    .readme-popup h2 {
+        font-size: 1rem;
+        margin: 1rem 0 0.5rem 0;
+    }
+
+    .readme-popup h3 {
+        font-size: 0.9rem;
+        margin: 0.75rem 0 0.5rem 0;
+    }
 }
