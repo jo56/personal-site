@@ -79,8 +79,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const htmlContent = await response.text();
 
-            // Display the HTML content
-            readmePopup.innerHTML = htmlContent;
+            // Create a temporary container to parse and clean the HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+
+            // Remove anchor link icons (typically found in headings)
+            const anchorLinks = tempDiv.querySelectorAll('a.anchor, a[aria-hidden="true"], svg.octicon-link');
+            anchorLinks.forEach(link => {
+                // Remove the anchor element or its parent if it's just the icon
+                if (link.classList.contains('anchor') || link.getAttribute('aria-hidden') === 'true') {
+                    link.remove();
+                } else if (link.parentElement && link.parentElement.classList.contains('anchor')) {
+                    link.parentElement.remove();
+                }
+            });
+
+            // Also remove any remaining octicon svgs that might be link icons
+            const octicons = tempDiv.querySelectorAll('svg.octicon');
+            octicons.forEach(icon => icon.remove());
+
+            // Display the cleaned HTML content
+            readmePopup.innerHTML = tempDiv.innerHTML;
         } catch (error) {
             readmePopup.innerHTML = `<p>Unable to load README: ${error.message}</p>`;
         }
