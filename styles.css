@@ -379,6 +379,7 @@ p {
     }
 
     .readme-popup {
+        width: 90%;
         max-width: 90%;
         max-height: 70vh;
         padding: 1.5rem;
