@@ -48,4 +48,61 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.classList.remove('show');
         popup.classList.remove('show');
     });
+
+    // README popup functionality
+    const readmeOverlay = document.createElement('div');
+    readmeOverlay.className = 'readme-popup-overlay';
+    document.body.appendChild(readmeOverlay);
+
+    const readmePopup = document.createElement('div');
+    readmePopup.className = 'readme-popup';
+    document.body.appendChild(readmePopup);
+
+    // Function to fetch and display README
+    async function showReadme(repoFullName) {
+        // Show popup with loading message
+        readmePopup.innerHTML = '<div class="loading">Loading README...</div>';
+        readmeOverlay.classList.add('show');
+        readmePopup.classList.add('show');
+
+        try {
+            // Fetch README from GitHub API
+            const response = await fetch(`https://api.github.com/repos/${repoFullName}/readme`, {
+                headers: {
+                    'Accept': 'application/vnd.github.html+json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('README not found');
+            }
+
+            const htmlContent = await response.text();
+
+            // Display the HTML content
+            readmePopup.innerHTML = htmlContent;
+        } catch (error) {
+            readmePopup.innerHTML = `<p>Unable to load README: ${error.message}</p>`;
+        }
+    }
+
+    // Add click handlers to project descriptions
+    const projectItems = document.querySelectorAll('.project-list li[data-repo]');
+    projectItems.forEach(item => {
+        const description = item.querySelector('.project-description');
+        const repoName = item.getAttribute('data-repo');
+
+        if (description && repoName) {
+            description.addEventListener('click', (e) => {
+                e.preventDefault();
+                showReadme(repoName);
+            });
+        }
+    });
+
+    // Hide README popup when clicking overlay
+    readmeOverlay.addEventListener('click', () => {
+        readmeOverlay.classList.remove('show');
+        readmePopup.classList.remove('show');
+    });
 });
