@@ -105,7 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 // If the src is a relative path (doesn't start with http:// or https://)
                 if (src && !src.startsWith('http://') && !src.startsWith('https://')) {
                     // Convert to absolute GitHub URL
-                    img.setAttribute('src', `https://raw.githubusercontent.com/${repoFullName}/main/${src}`);
+                    const newSrc = `https://raw.githubusercontent.com/${repoFullName}/main/${src}`;
+                    img.setAttribute('src', newSrc);
+                    // Also prevent the browser from trying to load the old relative URL
+                    // by removing any srcset attributes that might interfere
+                    img.removeAttribute('srcset');
+                }
+            });
+
+            // Also fix any anchor tags that wrap images
+            const imageLinks = tempDiv.querySelectorAll('a[href^="assets/"]');
+            imageLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('http://') && !href.startsWith('https://')) {
+                    link.setAttribute('href', `https://raw.githubusercontent.com/${repoFullName}/main/${href}`);
                 }
             });
 
