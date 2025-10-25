@@ -57,7 +57,7 @@ body {
 }
 
 #projects {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
 .section.active {
@@ -300,29 +300,37 @@ p {
     display: flex;
     gap: 3rem;
     justify-content: center;
-    margin: 0 auto 2.5rem auto;
+    align-items: flex-start;
+    margin: 0 auto 3rem auto;
 }
 
 .project-list {
     list-style: none;
     text-align: center;
-    max-width: 300px;
     margin: 0;
-    position: relative;
-    left: -.2rem;
+    flex: 0 0 auto;
 }
 
 .project-list li {
-    margin: 1.2rem 0;
+    margin: 0 0 1.5rem 0;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     align-items: center;
 }
 
+.project-list li:first-child {
+    margin-top: 0;
+}
+
+.project-list li:last-child {
+    margin-bottom: 0;
+}
+
 .project-link {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
@@ -351,6 +359,8 @@ p {
 .project-list span {
     font-size: 0.85rem;
     color: #666;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .project-description {
