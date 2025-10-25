@@ -395,7 +395,7 @@ p {
 
     .projects-grid {
         flex-direction: column;
-        gap: 0;
+        gap: 1.5rem;
     }
 
     .project-list {
