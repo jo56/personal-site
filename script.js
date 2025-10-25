@@ -98,6 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const octicons = tempDiv.querySelectorAll('svg.octicon');
             octicons.forEach(icon => icon.remove());
 
+            // Fix relative image URLs to point to GitHub's raw content
+            const images = tempDiv.querySelectorAll('img');
+            images.forEach(img => {
+                const src = img.getAttribute('src');
+                // If the src is a relative path (doesn't start with http:// or https://)
+                if (src && !src.startsWith('http://') && !src.startsWith('https://')) {
+                    // Convert to absolute GitHub URL
+                    img.setAttribute('src', `https://raw.githubusercontent.com/${repoFullName}/main/${src}`);
+                }
+            });
+
             // Display the cleaned HTML content
             readmePopup.innerHTML = tempDiv.innerHTML;
         } catch (error) {
