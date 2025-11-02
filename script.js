@@ -156,9 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const imageLightbox = document.createElement('div');
     imageLightbox.className = 'image-lightbox';
+    const lightboxContainer = document.createElement('div');
+    lightboxContainer.className = 'lightbox-container';
     const lightboxImage = document.createElement('img');
     lightboxImage.className = 'lightbox-image';
-    imageLightbox.appendChild(lightboxImage);
+    lightboxContainer.appendChild(lightboxImage);
+    imageLightbox.appendChild(lightboxContainer);
     document.body.appendChild(imageLightbox);
 
     // Open lightbox when clicking profile icon
@@ -168,13 +171,75 @@ document.addEventListener('DOMContentLoaded', () => {
             lightboxImage.src = profileIcon.src;
             imageLightboxOverlay.classList.add('show');
             imageLightbox.classList.add('show');
+            lightboxImage.classList.remove('zoomed');
         });
         profileIcon.style.cursor = 'pointer';
     }
+
+    // Toggle zoom when clicking the lightbox image
+    lightboxImage.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (!lightboxImage.classList.contains('zoomed')) {
+            // Get image dimensions and position
+            const rect = lightboxImage.getBoundingClientRect();
+            const imgWidth = rect.width;
+            const imgHeight = rect.height;
+
+            // Calculate click position relative to the image
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            // Calculate the zoomed dimensions
+            const zoomedWidth = imgWidth * 1.75;
+            const zoomedHeight = imgHeight * 1.75;
+
+            // Set container size to accommodate zoomed image
+            lightboxContainer.style.width = `${zoomedWidth}px`;
+            lightboxContainer.style.height = `${zoomedHeight}px`;
+
+            // Calculate scroll position to center clicked point
+            const scrollX = (clickX * 1.75) - (imageLightbox.clientWidth / 2);
+            const scrollY = (clickY * 1.75) - (imageLightbox.clientHeight / 2);
+
+            lightboxImage.classList.add('zoomed');
+
+            // Scroll to the clicked position
+            setTimeout(() => {
+                imageLightbox.scrollLeft = scrollX;
+                imageLightbox.scrollTop = scrollY;
+            }, 10);
+        } else {
+            // Zoom out - reset
+            lightboxContainer.style.width = '';
+            lightboxContainer.style.height = '';
+            lightboxImage.classList.remove('zoomed');
+            imageLightbox.scrollLeft = 0;
+            imageLightbox.scrollTop = 0;
+        }
+    });
+
+    // Close lightbox when clicking outside the image
+    imageLightbox.addEventListener('click', (e) => {
+        if (e.target === imageLightbox || e.target === lightboxContainer) {
+            imageLightboxOverlay.classList.remove('show');
+            imageLightbox.classList.remove('show');
+            lightboxImage.classList.remove('zoomed');
+            lightboxContainer.style.width = '';
+            lightboxContainer.style.height = '';
+            imageLightbox.scrollLeft = 0;
+            imageLightbox.scrollTop = 0;
+        }
+    });
 
     // Close lightbox when clicking overlay
     imageLightboxOverlay.addEventListener('click', () => {
         imageLightboxOverlay.classList.remove('show');
         imageLightbox.classList.remove('show');
+        lightboxImage.classList.remove('zoomed');
+        lightboxContainer.style.width = '';
+        lightboxContainer.style.height = '';
+        imageLightbox.scrollLeft = 0;
+        imageLightbox.scrollTop = 0;
     });
 });

@@ -324,15 +324,18 @@ p {
 
 .image-lightbox {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 1002;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
-    max-width: 90vw;
-    max-height: 90vh;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-lightbox.show {
@@ -340,10 +343,27 @@ p {
     pointer-events: auto;
 }
 
+.lightbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
 .lightbox-image {
-    max-width: 100%;
+    max-width: 90vw;
     max-height: 90vh;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    cursor: zoom-in;
+    transition: none;
+}
+
+.lightbox-image.zoomed {
+    max-width: none;
+    max-height: none;
+    cursor: zoom-out;
 }
 
 .projects-grid {
