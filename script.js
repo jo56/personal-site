@@ -148,4 +148,33 @@ document.addEventListener('DOMContentLoaded', () => {
         readmeOverlay.classList.remove('show');
         readmePopup.classList.remove('show');
     });
+
+    // Image lightbox functionality
+    const imageLightboxOverlay = document.createElement('div');
+    imageLightboxOverlay.className = 'image-lightbox-overlay';
+    document.body.appendChild(imageLightboxOverlay);
+
+    const imageLightbox = document.createElement('div');
+    imageLightbox.className = 'image-lightbox';
+    const lightboxImage = document.createElement('img');
+    lightboxImage.className = 'lightbox-image';
+    imageLightbox.appendChild(lightboxImage);
+    document.body.appendChild(imageLightbox);
+
+    // Open lightbox when clicking profile icon
+    const profileIcon = document.getElementById('profile-icon');
+    if (profileIcon) {
+        profileIcon.addEventListener('click', () => {
+            lightboxImage.src = profileIcon.src;
+            imageLightboxOverlay.classList.add('show');
+            imageLightbox.classList.add('show');
+        });
+        profileIcon.style.cursor = 'pointer';
+    }
+
+    // Close lightbox when clicking overlay
+    imageLightboxOverlay.addEventListener('click', () => {
+        imageLightboxOverlay.classList.remove('show');
+        imageLightbox.classList.remove('show');
+    });
 });
