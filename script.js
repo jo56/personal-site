@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav a');
     const sections = document.querySelectorAll('.section');
 
+    // Get profile icon
+    const profileIcon = document.getElementById('profile-icon');
+
     // Section navigation
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -19,6 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLink.style.opacity = '0.5';
             });
             link.style.opacity = '1';
+
+            // Show/hide profile icon based on active section
+            if (profileIcon) {
+                if (targetId === 'home') {
+                    profileIcon.style.display = 'block';
+                } else {
+                    profileIcon.style.display = 'none';
+                }
+            }
         });
     });
 
@@ -165,7 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(imageLightbox);
 
     // Open lightbox when clicking profile icon
-    const profileIcon = document.getElementById('profile-icon');
     if (profileIcon) {
         profileIcon.addEventListener('click', () => {
             lightboxImage.src = profileIcon.src;
