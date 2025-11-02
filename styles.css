@@ -314,7 +314,7 @@ p {
     z-index: 1001;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s;
+    transition: opacity 0.05s;
 }
 
 .image-lightbox-overlay.show {
@@ -331,7 +331,7 @@ p {
     z-index: 1002;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s;
+    transition: opacity 0.05s;
     overflow: auto;
     display: flex;
     align-items: center;
