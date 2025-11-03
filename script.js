@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav a');
     const sections = document.querySelectorAll('.section');
 
+    // Get profile icon
+    const profileIcon = document.getElementById('profile-icon');
+
     // Section navigation
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -19,6 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLink.style.opacity = '0.5';
             });
             link.style.opacity = '1';
+
+            // Show/hide profile icon based on active section
+            if (profileIcon) {
+                if (targetId === 'home') {
+                    profileIcon.style.display = 'block';
+                } else {
+                    profileIcon.style.display = 'none';
+                }
+            }
         });
     });
 
@@ -147,5 +159,134 @@ document.addEventListener('DOMContentLoaded', () => {
     readmeOverlay.addEventListener('click', () => {
         readmeOverlay.classList.remove('show');
         readmePopup.classList.remove('show');
+    });
+
+    // Image lightbox functionality
+    const imageLightboxOverlay = document.createElement('div');
+    imageLightboxOverlay.className = 'image-lightbox-overlay';
+    document.body.appendChild(imageLightboxOverlay);
+
+    const imageLightbox = document.createElement('div');
+    imageLightbox.className = 'image-lightbox';
+    const lightboxContainer = document.createElement('div');
+    lightboxContainer.className = 'lightbox-container';
+    const lightboxImage = document.createElement('img');
+    lightboxImage.className = 'lightbox-image';
+    lightboxContainer.appendChild(lightboxImage);
+    imageLightbox.appendChild(lightboxContainer);
+    document.body.appendChild(imageLightbox);
+
+    // Open lightbox when clicking profile icon
+    if (profileIcon) {
+        profileIcon.addEventListener('click', () => {
+            lightboxImage.src = profileIcon.src;
+            lightboxImage.style.display = 'block';
+            lightboxContainer.querySelector('video')?.remove(); // Remove any existing video
+            imageLightboxOverlay.classList.add('show');
+            imageLightbox.classList.add('show');
+            lightboxImage.classList.remove('zoomed');
+        });
+        profileIcon.style.cursor = 'pointer';
+    }
+
+    // Open lightbox when clicking about video
+    const aboutVideo = document.getElementById('about-video');
+    if (aboutVideo) {
+        aboutVideo.addEventListener('click', () => {
+            // Hide the image and create video element
+            lightboxImage.style.display = 'none';
+
+            // Remove any existing video
+            lightboxContainer.querySelector('video')?.remove();
+
+            // Create new video element for lightbox
+            const lightboxVideo = document.createElement('video');
+            lightboxVideo.className = 'lightbox-image';
+            lightboxVideo.autoplay = true;
+            lightboxVideo.loop = true;
+            lightboxVideo.muted = true;
+            lightboxVideo.playsInline = true;
+            lightboxVideo.controls = true; // Add controls in lightbox
+
+            const source = document.createElement('source');
+            source.src = 'compressed-recording-1-hq.webm';
+            source.type = 'video/webm';
+            lightboxVideo.appendChild(source);
+
+            lightboxContainer.appendChild(lightboxVideo);
+
+            imageLightboxOverlay.classList.add('show');
+            imageLightbox.classList.add('show');
+        });
+        aboutVideo.style.cursor = 'pointer';
+    }
+
+    // Toggle zoom when clicking the lightbox image
+    lightboxImage.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (!lightboxImage.classList.contains('zoomed')) {
+            // Get image dimensions and position
+            const rect = lightboxImage.getBoundingClientRect();
+            const imgWidth = rect.width;
+            const imgHeight = rect.height;
+
+            // Calculate click position relative to the image
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            // Calculate the zoomed dimensions
+            const zoomedWidth = imgWidth * 1.75;
+            const zoomedHeight = imgHeight * 1.75;
+
+            // Set container size to accommodate zoomed image
+            lightboxContainer.style.width = `${zoomedWidth}px`;
+            lightboxContainer.style.height = `${zoomedHeight}px`;
+
+            // Calculate scroll position to center clicked point
+            const scrollX = (clickX * 1.75) - (imageLightbox.clientWidth / 2);
+            const scrollY = (clickY * 1.75) - (imageLightbox.clientHeight / 2);
+
+            lightboxImage.classList.add('zoomed');
+
+            // Scroll to the clicked position
+            setTimeout(() => {
+                imageLightbox.scrollLeft = scrollX;
+                imageLightbox.scrollTop = scrollY;
+            }, 10);
+        } else {
+            // Zoom out - reset
+            lightboxContainer.style.width = '';
+            lightboxContainer.style.height = '';
+            lightboxImage.classList.remove('zoomed');
+            imageLightbox.scrollLeft = 0;
+            imageLightbox.scrollTop = 0;
+        }
+    });
+
+    // Helper function to close lightbox
+    function closeLightbox() {
+        imageLightboxOverlay.classList.remove('show');
+        imageLightbox.classList.remove('show');
+        lightboxImage.classList.remove('zoomed');
+        lightboxContainer.style.width = '';
+        lightboxContainer.style.height = '';
+        imageLightbox.scrollLeft = 0;
+        imageLightbox.scrollTop = 0;
+        // Remove any video elements
+        lightboxContainer.querySelector('video')?.remove();
+        lightboxImage.style.display = 'block';
+    }
+
+    // Close lightbox when clicking outside the image
+    imageLightbox.addEventListener('click', (e) => {
+        if (e.target === imageLightbox || e.target === lightboxContainer) {
+            closeLightbox();
+        }
+    });
+
+    // Close lightbox when clicking overlay
+    imageLightboxOverlay.addEventListener('click', () => {
+        closeLightbox();
     });
 });
