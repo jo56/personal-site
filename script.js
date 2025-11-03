@@ -180,11 +180,45 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileIcon) {
         profileIcon.addEventListener('click', () => {
             lightboxImage.src = profileIcon.src;
+            lightboxImage.style.display = 'block';
+            lightboxContainer.querySelector('video')?.remove(); // Remove any existing video
             imageLightboxOverlay.classList.add('show');
             imageLightbox.classList.add('show');
             lightboxImage.classList.remove('zoomed');
         });
         profileIcon.style.cursor = 'pointer';
+    }
+
+    // Open lightbox when clicking about video
+    const aboutVideo = document.getElementById('about-video');
+    if (aboutVideo) {
+        aboutVideo.addEventListener('click', () => {
+            // Hide the image and create video element
+            lightboxImage.style.display = 'none';
+
+            // Remove any existing video
+            lightboxContainer.querySelector('video')?.remove();
+
+            // Create new video element for lightbox
+            const lightboxVideo = document.createElement('video');
+            lightboxVideo.className = 'lightbox-image';
+            lightboxVideo.autoplay = true;
+            lightboxVideo.loop = true;
+            lightboxVideo.muted = true;
+            lightboxVideo.playsInline = true;
+            lightboxVideo.controls = true; // Add controls in lightbox
+
+            const source = document.createElement('source');
+            source.src = 'compressed-recording-1-hq.webm';
+            source.type = 'video/webm';
+            lightboxVideo.appendChild(source);
+
+            lightboxContainer.appendChild(lightboxVideo);
+
+            imageLightboxOverlay.classList.add('show');
+            imageLightbox.classList.add('show');
+        });
+        aboutVideo.style.cursor = 'pointer';
     }
 
     // Toggle zoom when clicking the lightbox image
@@ -230,21 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Close lightbox when clicking outside the image
-    imageLightbox.addEventListener('click', (e) => {
-        if (e.target === imageLightbox || e.target === lightboxContainer) {
-            imageLightboxOverlay.classList.remove('show');
-            imageLightbox.classList.remove('show');
-            lightboxImage.classList.remove('zoomed');
-            lightboxContainer.style.width = '';
-            lightboxContainer.style.height = '';
-            imageLightbox.scrollLeft = 0;
-            imageLightbox.scrollTop = 0;
-        }
-    });
-
-    // Close lightbox when clicking overlay
-    imageLightboxOverlay.addEventListener('click', () => {
+    // Helper function to close lightbox
+    function closeLightbox() {
         imageLightboxOverlay.classList.remove('show');
         imageLightbox.classList.remove('show');
         lightboxImage.classList.remove('zoomed');
@@ -252,5 +273,20 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxContainer.style.height = '';
         imageLightbox.scrollLeft = 0;
         imageLightbox.scrollTop = 0;
+        // Remove any video elements
+        lightboxContainer.querySelector('video')?.remove();
+        lightboxImage.style.display = 'block';
+    }
+
+    // Close lightbox when clicking outside the image
+    imageLightbox.addEventListener('click', (e) => {
+        if (e.target === imageLightbox || e.target === lightboxContainer) {
+            closeLightbox();
+        }
+    });
+
+    // Close lightbox when clicking overlay
+    imageLightboxOverlay.addEventListener('click', () => {
+        closeLightbox();
     });
 });
