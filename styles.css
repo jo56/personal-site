@@ -1,3 +1,24 @@
+:root {
+    --color-text: #1a1a1a;
+    --color-text-muted: #666;
+    --color-bg: #fafafa;
+    --color-bg-code: #e8e8e8;
+    --color-border: #1a1a1a;
+    --color-overlay: rgba(0, 0, 0, 0.3);
+    --color-overlay-dark: rgba(0, 0, 0, 0.9);
+
+    --font-mono: 'Courier New', monospace;
+
+    --transition-normal: 0.2s;
+    --transition-fast: 0.05s;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,11 +30,11 @@ html {
 }
 
 body {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-mono);
     line-height: 1.8;
     overflow-x: hidden;
-    background: #fafafa;
-    color: #1a1a1a;
+    background: var(--color-bg);
+    color: var(--color-text);
 }
 
 /* Layout */
@@ -25,21 +46,21 @@ body {
     justify-content: center;
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--spacing-lg);
 }
 
 .profile-icon {
     width: 500px;
     height: 500px;
     object-fit: cover;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-lg);
     margin-top: -4rem;
 }
 
 .home-video {
     width: 75%;
     max-width: 100%;
-    margin: 1.5rem auto 1rem auto;
+    margin: var(--spacing-md) auto var(--spacing-sm) auto;
     display: block;
     border-radius: 4px;
     cursor: pointer;
@@ -47,15 +68,15 @@ body {
 
 .nav {
     display: flex;
-    gap: 2rem;
+    gap: var(--spacing-lg);
     margin-bottom: 0rem;
 }
 
 .nav a {
-    color: #1a1a1a;
+    color: var(--color-text);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
 }
 
 .nav a:hover {
@@ -66,7 +87,7 @@ body {
     display: none;
     text-align: center;
     padding: 0;
-    margin-top: 1rem;
+    margin-top: var(--spacing-sm);
 }
 
 #about {
@@ -74,7 +95,7 @@ body {
 }
 
 #projects {
-    margin-top: 2rem;
+    margin-top: var(--spacing-lg);
 }
 
 .section.active {
@@ -93,19 +114,19 @@ h1 {
 h2 {
     font-size: 3rem;
     font-weight: 300;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-lg);
     letter-spacing: -0.02em;
 }
 
 p {
     font-size: 1rem;
-    margin: 0.5rem 0;
-    color: #666;
+    margin: var(--spacing-xs) 0;
+    color: var(--color-text-muted);
 }
 
 .social-links {
     display: flex;
-    gap: 1.5rem;
+    gap: var(--spacing-md);
     justify-content: center;
     margin-top: 0rem;
     position: relative;
@@ -122,9 +143,9 @@ p {
 }
 
 .social-links a {
-    color: #666;
+    color: var(--color-text-muted);
     opacity: 0.5;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
     display: flex;
     align-items: center;
 }
@@ -137,9 +158,9 @@ p {
     background: none;
     border: none;
     cursor: pointer;
-    color: #666;
+    color: var(--color-text-muted);
     opacity: 0.5;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
     display: flex;
     align-items: center;
     padding: 0;
@@ -154,16 +175,16 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fafafa;
-    border: 1px solid #1a1a1a;
-    padding: 2rem;
-    font-family: 'Courier New', monospace;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-lg);
+    font-family: var(--font-mono);
     font-size: 0.9rem;
-    color: #1a1a1a;
+    color: var(--color-text);
     z-index: 1000;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
 }
 
 .email-popup.show {
@@ -177,11 +198,11 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--color-overlay);
     z-index: 999;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
 }
 
 .email-popup-overlay.show {
@@ -194,19 +215,19 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fafafa;
-    border: 1px solid #1a1a1a;
-    padding: 2rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-lg);
     max-width: 700px;
     max-height: 80vh;
     overflow-y: auto;
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: #1a1a1a;
+    color: var(--color-text);
     z-index: 1000;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
 }
 
 .readme-popup.show {
@@ -235,11 +256,11 @@ p {
 .readme-popup p {
     margin: 0.75rem 0;
     line-height: 1.6;
-    color: #1a1a1a;
+    color: var(--color-text);
 }
 
 .readme-popup a {
-    color: #1a1a1a;
+    color: var(--color-text);
     text-decoration: underline;
 }
 
@@ -258,15 +279,15 @@ p {
 }
 
 .readme-popup code {
-    background: #e8e8e8;
+    background: var(--color-bg-code);
     padding: 0.15rem 0.4rem;
     border-radius: 3px;
     font-size: 0.8rem;
 }
 
 .readme-popup pre {
-    background: #e8e8e8;
-    padding: 1rem;
+    background: var(--color-bg-code);
+    padding: var(--spacing-sm);
     overflow-x: auto;
     margin: 0.75rem 0;
     border-radius: 3px;
@@ -278,10 +299,10 @@ p {
 }
 
 .readme-popup blockquote {
-    border-left: 3px solid #666;
-    padding-left: 1rem;
+    border-left: 3px solid var(--color-text-muted);
+    padding-left: var(--spacing-sm);
     margin: 0.75rem 0;
-    color: #666;
+    color: var(--color-text-muted);
 }
 
 .readme-popup img {
@@ -292,7 +313,7 @@ p {
 
 .readme-popup .loading {
     text-align: center;
-    color: #666;
+    color: var(--color-text-muted);
 }
 
 .readme-popup-overlay {
@@ -301,11 +322,11 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--color-overlay);
     z-index: 999;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
 }
 
 .readme-popup-overlay.show {
@@ -319,11 +340,11 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: var(--color-overlay-dark);
     z-index: 1001;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.05s;
+    transition: opacity var(--transition-fast);
 }
 
 .image-lightbox-overlay.show {
@@ -340,7 +361,7 @@ p {
     z-index: 1002;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.05s;
+    transition: opacity var(--transition-fast);
     overflow: auto;
     display: flex;
     align-items: center;
@@ -377,10 +398,10 @@ p {
 
 .projects-grid {
     display: flex;
-    gap: 3rem;
+    gap: var(--spacing-xl);
     justify-content: center;
     align-items: flex-start;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto var(--spacing-xl) auto;
     max-width: 100%;
 }
 
@@ -393,7 +414,7 @@ p {
 }
 
 .project-list li {
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 var(--spacing-md) 0;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
@@ -412,14 +433,14 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
 }
 
 .project-list a {
-    color: #1a1a1a;
+    color: var(--color-text);
     text-decoration: none;
     font-weight: 600;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid var(--color-border);
     display: inline-block;
 }
 
@@ -430,7 +451,7 @@ p {
 .github-icon {
     border: none !important;
     opacity: 0.5;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
 }
 
 .github-icon:hover {
@@ -439,14 +460,14 @@ p {
 
 .project-list span {
     font-size: 0.85rem;
-    color: #666;
+    color: var(--color-text-muted);
     text-align: center;
     white-space: nowrap;
 }
 
 .project-description {
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-normal);
 }
 
 .project-description:hover {
@@ -463,13 +484,13 @@ p {
     }
 
     .content {
-        padding: 1rem;
+        padding: var(--spacing-sm);
     }
 
     .profile-icon {
         width: 300px;
         height: 300px;
-        margin-bottom: 1rem;
+        margin-bottom: var(--spacing-sm);
         margin-top: -2rem;
     }
 
@@ -484,13 +505,13 @@ p {
     }
 
     #projects {
-        margin-top: 0.5rem;
+        margin-top: var(--spacing-xs);
     }
 
     .projects-grid {
         flex-direction: column;
-        gap: 1.5rem;
-        margin-bottom: 1.5rem;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
     }
 
     .project-list {
@@ -502,7 +523,7 @@ p {
         width: 90%;
         max-width: 90%;
         max-height: 70vh;
-        padding: 1.5rem;
+        padding: var(--spacing-md);
         font-size: 0.8rem;
     }
 
